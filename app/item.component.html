@@ -1,0 +1,25 @@
+<div>
+  <h2>Items</h2>
+  <div>
+    <label>Item Type:</label> <input #itemType />
+    <button (click)="add(itemType.value); itemType.value=''">
+      Add
+    </button>
+  </div>
+  <ul class="items">
+    <li *ngFor="let item of items" 
+      [class.selected]="item===selectedItem"
+      (click)="onSelect(item)">
+      <!--each item goes here-->
+      <span class="badge">{{item.id}}</span> 
+      <span>{{item.type}}</span>
+      <button class="delete" (click)="delete(item); $event.stopPropagation()">x</button>
+    </li>
+  </ul>
+  <div *ngIf="selectedItem">
+    <h2>
+      {{selectedItem.type | uppercase }} is my item
+    </h2>
+    <button (click)="gotoDetail()">View Detail</button>
+  </div>
+</div>
